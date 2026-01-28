@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import express from "express";
 import healthRouter from "./routes/health.router";
+import todosRouter from "./routes/todos.router";
 
 config();
 
@@ -10,6 +11,7 @@ function buildApp() {
   app.use(express.json());
 
   app.use('/health', healthRouter);
+  app.use('/todos', todosRouter);
 
   app.use((req, res) => {
     res.status(404).json({
@@ -20,7 +22,7 @@ function buildApp() {
   app.use((err: unknown, _req: express.Request, res: express.Response) => {
 
     console.error(err);
-    
+
     if (err instanceof Error) {
       return res.status(500).json({
         status: 'Internal Server Error',
