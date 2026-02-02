@@ -4,6 +4,7 @@
   "description": "``` Hello world! ```",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf dist && tsc -p ./tsconfig.json",
     "dev": "tsx watch src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
