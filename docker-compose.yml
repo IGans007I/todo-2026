@@ -1,0 +1,8 @@
+services:
+  api:
+    build: .
+    ports:
+      - "30472:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production

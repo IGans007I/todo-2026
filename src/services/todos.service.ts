@@ -8,6 +8,11 @@ function listTodos(): Todos {
 }
 
 function createTodo(title: Todo['title']): Todo {
+
+  if (!title) {
+    throw new Error('Title is required');
+  }
+
   const todo: Todo = {
     id: ++iterator,
     title,
