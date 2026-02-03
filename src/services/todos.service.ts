@@ -44,15 +44,6 @@ function getTodo(id: Todo['id']) {
         return store.get(id);
     }
 
-
-
-
-
-
-
-
-
-
     export {
         listTodos,
         createTodo,
