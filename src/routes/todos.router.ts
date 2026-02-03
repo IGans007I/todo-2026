@@ -13,9 +13,9 @@ router.get('/', (_req, res) => {
 router.post('/', (req, res) => {
   // Varinat 1
   const { title } = req.body ?? {};
-  debugger
   // Variant 2
   // const title = req.body.title;
+
 
   if (!title) {
     return res.status(400).json({
