@@ -22,7 +22,41 @@ function createTodo(title: Todo['title']): Todo {
   return todo;
 }
 
-export {
-  listTodos,
-  createTodo
-};
+function deleteTodo(id: Todo['id']) {
+        return store.delete(id);
+    }
+
+function updateTodo(id: Todo['id'], todo: Partial<Todo>) {
+    const currentTodo = getTodo(id);
+    if (!currentTodo) {
+        return null;
+    }
+    const updatedTodo = {
+        ...currentTodo,
+        ...todo,
+    };
+    store.set(id, updatedTodo);
+    return updatedTodo;
+}
+
+
+function getTodo(id: Todo['id']) {
+        return store.get(id);
+    }
+
+
+
+
+
+
+
+
+
+
+    export {
+        listTodos,
+        createTodo,
+        deleteTodo,
+        updateTodo,
+        getTodo
+    };
