@@ -44,10 +44,17 @@ function getTodo(id: Todo['id']) {
         return store.get(id);
     }
 
+// Добавляем метод для получения стора (нужен для работы с категориями)
+function getStore() {
+  return store;
+}
+
+    
     export {
         listTodos,
         createTodo,
         deleteTodo,
         updateTodo,
-        getTodo
+        getTodo,
+        getStore
     };

@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import express from "express";
 import healthRouter from "./routes/health.router";
 import todosRouter from "./routes/todos.router";
+import categoriesRouter from "./routes/categories.router";
 
 config();
 
@@ -12,6 +13,7 @@ function buildApp() {
 
   app.use('/health', healthRouter);
   app.use('/todos', todosRouter);
+app.use('/categories', categoriesRouter);
 
   app.use((req, res) => {
     res.status(404).json({

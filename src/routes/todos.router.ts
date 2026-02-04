@@ -1,5 +1,8 @@
 import { Router } from 'express';
 import { listTodos, createTodo, deleteTodo,updateTodo, getTodo} from '../services/todos.service';
+import { getStore } from '../services/todos.service';
+import { getCategory } from '../services/categories.service';
+
 
 const router = Router();
 
@@ -48,18 +51,33 @@ router.post('/', (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    const {id} = req.params;
-    const todo = getTodo(+id);
-    if (!todo){
-        return res.status(404).json({
-            status: "NOT_FOUND",
-            message: "Todo not found",
-        });
-    }
-    res.status(200).json({
-        item: todo,
-        message: "Todo found",
+  const { id } = req.params;
+  const todo = getTodo(+id);
+  if (!todo) {
+    return res.status(404).json({
+      status: "NOT_FOUND",
+      message: "Todo not found",
     });
+  }
+
+  // Получаем информацию о категориях этой тудушки
+const categoriesInfo: { id: number; title: string }[] = [];
+if (todo.categoryIds && todo.categoryIds.length > 0) {
+    for (const catId of todo.categoryIds) {
+        const category = getCategory(catId);
+        if (category) {
+            categoriesInfo.push({ id: category.id, title: category.title });
+        }
+    }
+}
+
+  res.status(200).json({
+    item: {
+      ...todo,
+      categories: categoriesInfo
+    },
+    message: "Todo found",
+  });
 });
 
 router.delete("/:id", (req, res) => {
